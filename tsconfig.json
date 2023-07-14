@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "checkJs": false,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "lib": [
+            "ES2020"
+        ],
+        "strict": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outDir": "types",
+        "esModuleInterop": true
+    },
+    "include": [
+        "src"
+    ]
+}
