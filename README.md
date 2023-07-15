@@ -1,5 +1,5 @@
 # @mhafemann/svelte-preprocessor-prism
-[![GitHub](https://img.shields.io/github/package-json/v/mhafemann/svelte-preprocessor-prism)](https://www.npmjs.com/package/mhafemann/svelte-preprocessor-prism) [![license](https://img.shields.io/github/license/mhafemann/svelte-preprocessor-prism)](https://github.com/mhafemann/svelte-preprocessor-prism/blob/main/LICENSE) ![Minified / Gzipped](https://img.shields.io/badge/Min%2FGzip%20-1.19%20KiB%20-blue)
+[![GitHub](https://img.shields.io/github/package-json/v/mhafemann/svelte-preprocess-prism)](https://www.npmjs.com/package/mhafemann/svelte-preprocess-prism) [![license](https://img.shields.io/github/license/mhafemann/svelte-preprocess-prism)](https://github.com/mhafemann/svelte-preprocess-prism/blob/main/LICENSE) ![Minified / Gzipped](https://img.shields.io/badge/Min%2FGzip%20-1.19%20KiB%20-blue)
 
 A [Svelte](https://svelte.dev/) preprocessor that generates highlighted code with [Prism.js](https://prismjs.com/).
 Inspired by: [Bjorn Lu](https://twitter.com/bluwyoo) - [Bending Svelte using pre-processors](https://www.youtube.com/watch?v=glp4iEBTkvQ).
