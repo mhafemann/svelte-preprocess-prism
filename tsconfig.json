@@ -1,19 +1,18 @@
 {
     "compilerOptions": {
-        "allowJs": true,
-        "checkJs": false,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "lib": [
-            "ES2020"
-        ],
-        "strict": true,
+        "esModuleInterop": true,
+        "target": "ES6",
+        "module": "commonjs",
         "declaration": true,
-        "emitDeclarationOnly": true,
-        "outDir": "types",
-        "esModuleInterop": true
+        "outDir": "./lib",
+        "strict": true
     },
     "include": [
-        "src"
+        "src",
+        "_old/index.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/__tests__/*"
     ]
 }

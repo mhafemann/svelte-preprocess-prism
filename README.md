@@ -102,7 +102,8 @@ Add the `language-<language>` class to your `<pre>` tag. The `<code>` tag is opt
 
 ## Todo
 
-- [ ] Add support for [Prism plugins](https://prismjs.com/plugins/)
-- [ ] Add TypeScript support
+- [x] Add support for [Prism plugins](https://prismjs.com/plugins/)
+- [ ] Add configuration options
+- [x] Add TypeScript support
 - [ ] Add Tests
 

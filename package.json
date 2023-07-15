@@ -1,6 +1,6 @@
 {
     "name": "@mhafemann/svelte-preprocess-prism",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "A Svelte preprocessor that generates highlighted code with Prism.js",
     "keywords": [
         "svelte",
@@ -16,15 +16,13 @@
         "email": "markhafemann1@gmail.com"
     },
     "type": "module",
-    "main": "dist/index.js",
-    "module": "src/index.js",
+    "main": "lib/index.js",
     "exports": {
         ".": {
-            "import": "./src/index.js",
-            "require": "./dist/index.cjs"
+            "import": "./lib/index.js"
         },
         "./package.json": "./package.json",
-        "./types/*": "./types/*"
+        "./types/*": "./lib/index.d.ts"
     },
     "types": "types/index.d.ts",
     "files": [
