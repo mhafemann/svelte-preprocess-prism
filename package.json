@@ -1,12 +1,16 @@
 {
     "name": "@mhafemann/svelte-preprocess-prism",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A Svelte preprocessor that generates highlighted code with Prism.js",
     "keywords": [
         "svelte",
         "prism",
         "preprocess"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mhafemann/svelte-preprocess-prism.git"
+    },
     "author": {
         "name": "Mark Hafemann",
         "email": "markhafemann1@gmail.com"
@@ -31,14 +35,14 @@
     "engines": {
         "node": ">=16.0.0"
     },
+    "private": false,
     "scripts": {
         "pretypes": "rm -rf types && mkdir types",
         "types": "tsc",
         "prebuild": "rm -rf dist && mkdir dist",
         "build": "esbuild src/index.js --bundle --external:process --platform=node --target=node16 --outfile=dist/index.cjs",
         "postbuild": "agadoo src/index.js",
-        "test": "uvu src \".\\.spec\\.js\"",
-        "prepublishOnly": "npm run build && npm run types"
+        "test": "uvu src \".\\.spec\\.js\""
     },
     "devDependencies": {
         "@types/node": "^20.2.1",
