@@ -5,6 +5,13 @@ A [Svelte](https://svelte.dev/) preprocessor that generates highlighted code wit
 Inspired by: [Bjorn Lu](https://twitter.com/bluwyoo) - [Bending Svelte using pre-processors](https://www.youtube.com/watch?v=glp4iEBTkvQ).
 
 
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Todo](#todo)
+
+
 ## Dependencies
 |Dependency|Version|
 |---|---|
@@ -89,3 +96,13 @@ Add the `language-<language>` class to your `<pre>` tag. The `<code>` tag is opt
 </code>
 </pre>
 ```
+
+![Example](assets/example-1.png)
+
+
+## Todo
+
+- [ ] Add support for [Prism plugins](https://prismjs.com/plugins/)
+- [ ] Add TypeScript support
+- [ ] Add Tests
+
