@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
-        "esModuleInterop": true,
-        "target": "ES6",
+        "lib": [
+            "es2022"
+        ],
         "module": "commonjs",
-        "declaration": true,
-        "outDir": "./lib",
-        "strict": true
+        "target": "es2022",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "lib",
+        "declaration": true
     },
     "include": [
-        "src",
-        "_old/index.js"
+        "src/**/*"
     ],
-    "exclude": [
-        "node_modules",
-        "**/__tests__/*"
-    ]
 }
