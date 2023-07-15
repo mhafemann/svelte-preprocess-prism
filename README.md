@@ -52,7 +52,9 @@ export default config;
 ## Usage
 
 Add the `language-<language>` class to your `<pre>` tag. The `<code>` tag is optional.
+Supports all [Prism.js](https://prismjs.com/#supported-languages) languages.
 
+```svelte
 
 ```svelte
 <!-- +page.svelte -->
@@ -78,6 +80,9 @@ greet();
 </pre>
 ```
 
+> ‼️ Escape any </script> tags e.g. `</script>` -> `<\/script>` when the language is Svelte to prevent TypeScript errors.
+
+
 Example output:
 
 ![Example](assets/example-2.png)
@@ -94,6 +99,7 @@ Example output:
 
 - [ ] Develop more robust error handling
 - [x] Add support for [Prism plugins](https://prismjs.com/plugins/)
+- [x] Add Svelte syntax highlighting
 - [ ] Add support for variables in mustache syntax
 - [ ] Add configuration options
 - [x] Add TypeScript support

@@ -33,19 +33,19 @@
         ]
     },
     "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        ".vscode/": true,
-        "_old/": true,
-        "assets/": true,
-        "node_modules/": true,
-        ".gitignore": true,
-        ".prettierignore": true,
-        "LICENSE": true,
-        "pnpm-lock.yaml": true
+        "**/.git": false,
+        "**/.svn": false,
+        "**/.hg": false,
+        "**/CVS": false,
+        "**/.DS_Store": false,
+        ".vscode/": false,
+        "_old/": false,
+        "assets/": false,
+        "node_modules/": false,
+        ".gitignore": false,
+        ".prettierignore": false,
+        "LICENSE": false,
+        "pnpm-lock.yaml": false
     },
     "hidefiles.selectedProfile": "Default"
 }

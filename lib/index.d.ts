@@ -1,3 +1,4 @@
+import 'prism-svelte';
 import 'prismjs/plugins/treeview/prism-treeview.js';
 declare const sveltePrism: {
     markup: ({ content, filename }: {

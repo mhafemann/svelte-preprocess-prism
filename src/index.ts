@@ -2,6 +2,7 @@
 import MagicString from 'magic-string';
 import { parse, walk } from 'svelte/compiler';
 import Prism from 'prismjs';
+import 'prism-svelte';
 import loadLanguages from 'prismjs/components/index.js';
 import 'prismjs/plugins/treeview/prism-treeview.js';
 loadLanguages();
@@ -44,6 +45,7 @@ const sveltePrism = {
                     */
                 const start = codeTag.children[0].start;
                 const end = codeTag.children[codeTag.children.length - 1].end;
+
                 const mustacheTag = codeTag.children.filter((child) => {
                     return child.type === 'MustacheTag';
                 })[0];
@@ -53,12 +55,14 @@ const sveltePrism = {
                 if (!mustacheTag || mustacheTag.expression.type != 'TemplateLiteral')
                     return;
                 /*
-                    get the content of the mustache tag, trim it, and highlight it with Prism.js.
+                    get the content of the mustache tag, escape script tags trim it, and highlight it with Prism.js.
                 */
                 const cont = ms
                     .slice(mustacheTag.start + 2, mustacheTag.end - 2)
+                    .replace(`<\\\/script>`, `</script>`)
                     .toString()
                     .trim();
+
                 const highlighted = Prism.highlight(cont, Prism.languages[lang], lang);
                 /*
                     replace the mustache tag with the highlighted code nested in a svelte @html block so that it is not escaped,
@@ -67,11 +71,13 @@ const sveltePrism = {
                 /*
                     add line numbers,
                 */
+
                 const numberedResult = lines
                     .map((line, i) => {
                         return `<span class="line-number">${i + 1}</span>${line}`;
                     })
                     .join('\n');
+
                 if (lang === 'treeview') {
                     ms.update(start, end, `{@html \`${highlighted}\`}`);
                 } else {
