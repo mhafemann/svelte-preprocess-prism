@@ -109,4 +109,4 @@ const sveltePrism: PreprocessorGroup = {
     style: () => {},
 };
 
-export { sveltePrism as default };
+export default sveltePrism;

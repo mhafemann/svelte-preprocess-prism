@@ -16,9 +16,25 @@
         "email": "markhafemann1@gmail.com"
     },
     "type": "module",
+    "exports": {
+        ".": {
+            "import": "./lib/index.js"
+        },
+        "./package.json": "./package.json",
+        "./types/*": "./lib/index.d.ts"
+    },
+    "types": "lib/index.d.ts",
+    "engines": {
+        "node": ">=16.0.0"
+    },
     "private": false,
     "scripts": {
-        "ts": "tsc"
+        "pretypes": "rm -rf types && mkdir types",
+        "types": "tsc",
+        "prebuild": "rm -rf dist && mkdir dist",
+        "build": "esbuild src/index.js --bundle --external:process --platform=node --target=node16 --outfile=dist/index.cjs",
+        "postbuild": "agadoo src/index.js",
+        "test": "uvu src \".\\.spec\\.js\""
     },
     "devDependencies": {
         "@types/node": "^20.2.1",

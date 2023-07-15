@@ -1,4 +1,4 @@
 import { PreprocessorGroup } from 'svelte/types/compiler/preprocess';
 import 'prismjs/plugins/treeview/prism-treeview.js';
 declare const sveltePrism: PreprocessorGroup;
-export { sveltePrism as default };
+export default sveltePrism;
