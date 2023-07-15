@@ -4,6 +4,14 @@
 A [Svelte](https://svelte.dev/) preprocessor that generates highlighted code with [Prism.js](https://prismjs.com/).
 Inspired by: [Bjorn Lu](https://twitter.com/bluwyoo) - [Bending Svelte using pre-processors](https://www.youtube.com/watch?v=glp4iEBTkvQ).
 
+
+## Dependencies
+|Dependency|Version|
+|---|---|
+| [magic-string](https://www.npmjs.com/package/magic-string)| ^0.30.1 |
+| [prismjs](https://www.npmjs.com/package/prismjs)| ^1.29.0 |
+| [svelte](https://www.npmjs.com/package/svelte)| ^4.0.5 |
+
 ## Installation
 
 Install with your preferred package manager.
@@ -47,6 +55,7 @@ Add the `language-<language>` class to your `<pre>` tag. The `<code>` tag is opt
 
 
 ```svelte
+<!-- +page.svelte -->
 <script>
 // ...
 </script>
