@@ -3,7 +3,7 @@
         "lib": [
             "es2022"
         ],
-        "module": "commonjs",
+        "module": "NodeNext",
         "target": "es2022",
         "strict": true,
         "esModuleInterop": true,
