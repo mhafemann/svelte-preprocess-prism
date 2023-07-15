@@ -33,6 +33,7 @@
     },
     "private": false,
     "scripts": {
+        "dev": "tsc -watch",
         "pretypes": "rm -rf types && mkdir types",
         "types": "tsc",
         "prebuild": "rm -rf dist && mkdir dist",
