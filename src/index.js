@@ -2,27 +2,30 @@ import MagicString from 'magic-string';
 import { parse, walk } from 'svelte/compiler';
 import Prism from 'prismjs';
 import loadLanguages from 'prismjs/components/index.js';
+import 'prismjs/plugins/treeview/prism-treeview.js';
 
 // TODO: Add Svelte language support to Prism.js.
 // TODO: Add support for Prism.js plugins.
-// TODO: Add jsdoc type annotations.
+
 loadLanguages();
+
+const splitLines = (str) => str.split(/\r?\n/);
 
 const sveltePrism = {
     markup: ({ content, filename }) => {
-        /*
+        /* 
             create a new MagicString instance and parse the content,
         */
         const ms = new MagicString(content);
         const ast = parse(content);
 
-        /*
+        /* 
             walk the AST,
         */
         walk(ast.html, {
             enter(node) {
                 if (node.type === 'Element' && node.name === 'pre') {
-                    /*
+                    /* 
                         get the language from the class attribute of the pre tag,
                     */
                     const lang = node.attributes
@@ -33,7 +36,9 @@ const sveltePrism = {
                             return selector.replace('language-', '');
                         })[0];
 
-                    // TODO: handle when there are no language definitions for the specified language
+                    /* 
+                        TODO: handle when there are no language definitions for the specified language
+                    */
                     if (!lang) return;
 
                     const codeTag = node.children.filter((child) => {
@@ -43,7 +48,7 @@ const sveltePrism = {
                     // TODO: handle when codeTag is undefined but lang is defined
                     if (!codeTag) return;
 
-                    /*
+                    /* 
                         get the start and end of the code tag,
                     */
                     const start = codeTag.children[0].start;
@@ -53,13 +58,12 @@ const sveltePrism = {
                         return child.type === 'MustacheTag';
                     })[0];
 
-                    /*
+                    /* 
                         If there is no mustache tag or the mustache tag is not a template literal,
                     */
                     if (!mustacheTag || mustacheTag.expression.type != 'TemplateLiteral')
                         return;
-
-                    /*
+                    /* 
                         get the content of the mustache tag, trim it, and highlight it with Prism.js.
                     */
                     const cont = ms
@@ -72,15 +76,29 @@ const sveltePrism = {
                         lang
                     );
 
-                    /*
+                    /* 
                         replace the mustache tag with the highlighted code nested in a svelte @html block so that it is not escaped,
                     */
-                    ms.update(start, end, `{@html \`${highlighted}\`}`);
+                    const lines = splitLines(highlighted);
+
+                    /* 
+                        add line numbers,
+                    */
+                    const numberedResult = lines
+                        .map((line, i) => {
+                            return `<span class="line-number">${i + 1}</span>${line}`;
+                        })
+                        .join('\n');
+                    if (lang === 'treeview') {
+                        ms.update(start, end, `{@html \`${highlighted}\`}`);
+                    } else {
+                        ms.update(start, end, `{@html \`${numberedResult}\`}`);
+                    }
                 }
             },
         });
 
-        /*
+        /* 
             return the code and the sourcemap,
         */
         return {
