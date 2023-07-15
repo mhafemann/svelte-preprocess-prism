@@ -15,7 +15,7 @@ const sveltePrism = {
         // @ts-ignore
         walk(ast.html, {
             enter(node) {
-                if (node.type != 'Element' && node.name != 'pre') return;
+                if (node.type != 'Element' || node.name != 'pre') return;
                 /*
                     get the language from the class attribute
                     of the pre tag,
