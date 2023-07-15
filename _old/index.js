@@ -4,7 +4,9 @@ import Prism from 'prismjs';
 import loadLanguages from 'prismjs/components/index.js';
 import 'prismjs/plugins/treeview/prism-treeview.js';
 loadLanguages();
+
 const splitLines = (str) => str.split(/\r?\n/);
+
 const sveltePrism = {
     markup: ({ content, filename }) => {
         const ms = new MagicString(content);
@@ -12,31 +14,30 @@ const sveltePrism = {
         // @ts-ignore
         walk(ast.html, {
             enter(node) {
-                if (node.type != 'Element' && node.name != 'pre')
-                    return;
+                if (node.type != 'Element' && node.name != 'pre') return;
                 /*
                     get the language from the class attribute
                     of the pre tag,
                 */
                 const lang = node.attributes
-                    .filter((/** @type {{ name: string }} */ attr) => attr.name === 'class')[0]
+                    .filter(
+                        (/** @type {{ name: string }} */ attr) => attr.name === 'class'
+                    )[0]
                     .value[0].data.split(' ')
                     .filter((selector) => selector.startsWith('language-'))
                     .map((selector) => {
-                    return selector.replace('language-', '');
-                })[0];
+                        return selector.replace('language-', '');
+                    })[0];
                 /*
                     TODO: handle when there are no language definitions for the
                     specified language
                 */
-                if (!lang)
-                    return;
+                if (!lang) return;
                 const codeTag = node.children.filter((child) => {
                     return child.type === 'Element' && child.name === 'code';
                 })[0];
                 // TODO: handle when codeTag is undefined but lang is defined
-                if (!codeTag)
-                    return;
+                if (!codeTag) return;
                 /*
                         get the start and end of the code tag,
                     */
@@ -67,13 +68,12 @@ const sveltePrism = {
                 */
                 const numberedResult = lines
                     .map((line, i) => {
-                    return `<span class="line-number">${i + 1}</span>${line}`;
-                })
+                        return `<span class="line-number">${i + 1}</span>${line}`;
+                    })
                     .join('\n');
                 if (lang === 'treeview') {
                     ms.update(start, end, `{@html \`${highlighted}\`}`);
-                }
-                else {
+                } else {
                     ms.update(start, end, `{@html \`${numberedResult}\`}`);
                 }
             },
@@ -83,7 +83,7 @@ const sveltePrism = {
             map: ms.generateMap({ hires: true, file: filename }),
         };
     },
-    script: () => { },
-    style: () => { },
+    script: () => {},
+    style: () => {},
 };
 export default sveltePrism;
