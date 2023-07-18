@@ -1,51 +1,80 @@
 {
-    "cSpell.words": [
-        "agadoo",
-        "outfile",
-        "postbuild",
-        "pretypes"
-    ],
-    "hidefiles.configurationType": "local",
-    "hidefiles.globalConfig": {
-        "profiles": [
-            {
-                "name": "Default",
-                "detail": "",
-                "description": "Test",
-                "hidden": [
-                    ".vscode/",
-                    "_old/",
-                    "assets/",
-                    "node_modules/",
-                    ".gitignore",
-                    ".prettierignore",
-                    "LICENSE",
-                    "pnpm-lock.yaml"
-                ]
-            },
-            {
-                "name": "Strict",
-                "detail": "Hide everything not immediately required",
-                "hidden": [
-                    "$Default"
-                ]
-            }
+  "cSpell.words": [
+    "agadoo",
+    "outfile",
+    "postbuild",
+    "pretypes"
+  ],
+  "hidefiles.configurationType": "local",
+  "hidefiles.globalConfig": {
+    "profiles": [
+      {
+        "name": "Default",
+        "detail": "",
+        "description": "Test",
+        "hidden": [
+          ".vscode/",
+          "_old/",
+          "assets/",
+          "node_modules/",
+          ".gitignore",
+          ".prettierignore",
+          "LICENSE",
+          "pnpm-lock.yaml",
+          "test/.npmrc",
+          "test/.prettierignore",
+          "test/.prettierrc",
+          "test/package.json",
+          "test/pnpm-lock.yaml",
+          "test/postcss.config.cjs",
+          "test/README.md",
+          "test/svelte.config.js",
+          "test/tailwind.config.cjs",
+          "test/tsconfig.json",
+          "test/vite.config.ts",
+          "test/.svelte-kit/",
+          "test/node_modules/",
+          "test/.gitignore"
+        ],
+        "peek": []
+      },
+      {
+        "name": "Strict",
+        "detail": "Hide everything not immediately required",
+        "hidden": [
+          "$Default"
         ]
-    },
-    "files.exclude": {
-        "**/.git": false,
-        "**/.svn": false,
-        "**/.hg": false,
-        "**/CVS": false,
-        "**/.DS_Store": false,
-        ".vscode/": false,
-        "_old/": false,
-        "assets/": false,
-        "node_modules/": false,
-        ".gitignore": false,
-        ".prettierignore": false,
-        "LICENSE": false,
-        "pnpm-lock.yaml": false
-    },
-    "hidefiles.selectedProfile": "Default"
+      }
+    ]
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    ".vscode/": true,
+    "_old/": true,
+    "assets/": true,
+    "node_modules/": true,
+    ".gitignore": true,
+    ".prettierignore": true,
+    "LICENSE": true,
+    "pnpm-lock.yaml": true,
+    "test/.npmrc": true,
+    "test/.prettierignore": true,
+    "test/.prettierrc": true,
+    "test/package.json": true,
+    "test/pnpm-lock.yaml": true,
+    "test/postcss.config.cjs": true,
+    "test/README.md": true,
+    "test/svelte.config.js": true,
+    "test/tailwind.config.cjs": true,
+    "test/tsconfig.json": true,
+    "test/vite.config.ts": true,
+    "test/.svelte-kit/": true,
+    "test/node_modules/": true,
+    "test/.gitignore": true
+  },
+  "hidefiles.selectedProfile": "Default"
 }

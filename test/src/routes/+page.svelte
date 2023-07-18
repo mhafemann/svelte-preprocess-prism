@@ -1,17 +1,14 @@
 <script lang="ts">
-    let n = 'mark';
-    console.log(n);
 </script>
 
-<!-- <p class="md:w-2/3">
-    Welcome to my development blog! I'm a hobbyist software developer from
-    Dallas, TX looking to get involved in the community. I love exploring new
-    tech, finding new ways to automate everything, and tinkering with my homelab
-    / website.
-</p> -->
+<pre class="language-svelte" data-highlight="10,12">
+<code>
+{`<div></div>`}
+</code>
+</pre>
 
-<!-- <RecentPosts /> -->
-<pre class="language-svelte"><code>
+<pre class="language-svelte" data-highlight="10,12">
+<code>
 {`
 <script lang="ts">
     import RecentPosts from '$lib/components/RecentPosts.svelte';
@@ -33,13 +30,6 @@
             excerpt: 'test-1',
             tags: ['js', 'css']
         },
-        {
-            title: 'My Second Post',
-            date: '2021-08-02',
-            slug: 'test-2',
-            excerpt: 'test-2',
-            tags: ['tailwind', 'svelte']
-        }
     ]
     
     console.log(posts);
@@ -70,7 +60,7 @@
 `}
 </code></pre>
 
-<pre class="language-treeview">
+<pre class="language-treeview mt-8">
 <code>
 {`
 ├── static/

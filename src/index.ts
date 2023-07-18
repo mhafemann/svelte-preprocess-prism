@@ -1,96 +1,63 @@
-// @ts-nocheck
 import MagicString from 'magic-string';
 import { parse, walk } from 'svelte/compiler';
 import Prism from 'prismjs';
 import 'prism-svelte';
-import loadLanguages from 'prismjs/components/index.js';
 import 'prismjs/plugins/treeview/prism-treeview.js';
+import loadLanguages from 'prismjs/components/index.js';
+import applyLineStyles from './lines.js';
+import deriveSettings from './settings.js';
+
 loadLanguages();
 
-const splitLines = (str: string) => str.split(/\r?\n/);
+const codeTag = (s: string) => `<code>${s}</code>`;
+const mustache = (s: string) => `{@html \`${s}\` }`;
+const isCodeTag = (n: any) => n.type === 'Element' && n.name === 'code';
+const isMustacheTag = (n: any) => n.type === 'MustacheTag';
 
-const sveltePrism = {
-    markup: ({ content, filename }) => {
-        const ms = new MagicString(content);
-        const ast = parse(content);
-        // @ts-ignore
-        walk(ast.html, {
-            enter(node) {
-                if (node.type != 'Element' || node.name != 'pre') return;
-                /*
-                    get the language from the class attribute
-                    of the pre tag,
-                */
-                const lang = node.attributes
-                    .filter(
-                        (/** @type {{ name: string }} */ attr) => attr.name === 'class'
-                    )[0]
-                    .value[0].data.split(' ')
-                    .filter((selector) => selector.startsWith('language-'))
-                    .map((selector) => {
-                        return selector.replace('language-', '');
-                    })[0];
-                /*
-                    TODO: handle when there are no language definitions for the
-                    specified language
-                */
-                if (!lang) return;
-                const codeTag = node.children.filter((child) => {
-                    return child.type === 'Element' && child.name === 'code';
-                })[0];
-                // TODO: handle when codeTag is undefined but lang is defined
-                if (!codeTag) return;
-                /*
-                        get the start and end of the code tag,
-                    */
-                const start = codeTag.children[0].start;
-                const end = codeTag.children[codeTag.children.length - 1].end;
+const sveltePreprocessPrism = {
+  name: 'svelte-prism',
+  markup({ content, filename }: any) {
+    const ms = new MagicString(content);
+    const ast: any = parse(ms.toString());
 
-                const mustacheTag = codeTag.children.filter((child) => {
-                    return child.type === 'MustacheTag';
-                })[0];
-                /*
-                    If there is no mustache tag or the mustache tag is not a template literal,
-                */
-                if (!mustacheTag || mustacheTag.expression.type != 'TemplateLiteral')
-                    return;
-                /*
-                    get the content of the mustache tag, escape script tags trim it, and highlight it with Prism.js.
-                */
-                const cont = ms
-                    .slice(mustacheTag.start + 2, mustacheTag.end - 2)
-                    .replace(`<\\\/script>`, `</script>`)
-                    .toString()
-                    .trim();
+    walk(ast.html, {
+      enter(node: any) {
+        if (node.type === 'Element' && node.name === 'pre') {
+          const { language, linenumbers, highlightRange } = deriveSettings(node);
+          if (!language || !Prism.languages[language]) return;
 
-                const highlighted = Prism.highlight(cont, Prism.languages[lang], lang);
-                /*
-                    replace the mustache tag with the highlighted code nested in a svelte @html block so that it is not escaped,
-                */
-                const lines = splitLines(highlighted);
-                /*
-                    add line numbers,
-                */
+          const hasCodeTag = node.children.filter(isCodeTag).length > 0;
 
-                const numberedResult = lines
-                    .map((line, i) => {
-                        return `<span class="line-number">${i + 1}</span>${line}`;
-                    })
-                    .join('\n');
+          const targetNode = hasCodeTag
+            ? node.children.filter(isCodeTag)[0].children.filter(isMustacheTag)[0]
+            : node.children.filter(isMustacheTag)[0];
 
-                if (lang === 'treeview') {
-                    ms.update(start, end, `{@html \`${highlighted}\`}`);
-                } else {
-                    ms.update(start, end, `{@html \`${numberedResult}\`}`);
-                }
-            },
-        });
-        return {
-            code: ms.toString(),
-            map: ms.generateMap({ hires: true, file: filename }),
-        };
-    },
-    script: () => {},
-    style: () => {},
+          const code = ms
+            .slice(targetNode.start + 2, targetNode.end - 2)
+            .replace(`<\\\/script>`, `</script>`)
+            .toString()
+            .trim();
+
+          const marked = Prism.highlight(code, Prism.languages[language], language);
+
+          const styled = applyLineStyles(marked, { linenumbers, highlightRange });
+
+          const tagged = codeTag(mustache(styled));
+
+          ms.overwrite(
+            node.children[0].start,
+            node.children[node.children.length - 1].end,
+            tagged
+          );
+        }
+      },
+    });
+
+    return {
+      code: ms.toString(),
+      map: ms.generateMap({ hires: true, file: filename }),
+    };
+  },
 };
-export default sveltePrism;
+
+export default sveltePreprocessPrism;

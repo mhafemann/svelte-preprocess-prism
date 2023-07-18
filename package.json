@@ -1,62 +1,62 @@
 {
-    "name": "@mhafemann/svelte-preprocess-prism",
-    "version": "0.0.8",
-    "description": "A Svelte preprocessor that generates highlighted code with Prism.js",
-    "keywords": [
-        "svelte",
-        "prism",
-        "preprocess"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mhafemann/svelte-preprocess-prism.git"
+  "name": "@mhafemann/svelte-preprocess-prism",
+  "version": "0.0.9",
+  "description": "A Svelte preprocessor that generates highlighted code with Prism.js",
+  "keywords": [
+    "svelte",
+    "prism",
+    "preprocess"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mhafemann/svelte-preprocess-prism.git"
+  },
+  "author": {
+    "name": "Mark Hafemann",
+    "email": "markhafemann1@gmail.com"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js"
     },
-    "author": {
-        "name": "Mark Hafemann",
-        "email": "markhafemann1@gmail.com"
-    },
-    "type": "module",
-    "main": "lib/index.js",
-    "exports": {
-        ".": {
-            "import": "./lib/index.js"
-        },
-        "./package.json": "./package.json",
-        "./types/*": "./lib/index.d.ts"
-    },
-    "types": "lib/index.d.ts",
-    "engines": {
-        "node": ">=16.0.0"
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "private": false,
-    "scripts": {
-        "dev": "tsc -watch",
-        "pretypes": "rm -rf types && mkdir types",
-        "types": "tsc",
-        "prebuild": "rm -rf dist && mkdir dist",
-        "build": "esbuild src/index.js --bundle --external:process --platform=node --target=node16 --outfile=dist/index.cjs",
-        "postbuild": "agadoo src/index.js",
-        "test": "uvu src \".\\.spec\\.js\""
-    },
-    "devDependencies": {
-        "@types/node": "^20.2.1",
-        "@types/prismjs": "^1.26.0",
-        "agadoo": "^3.0.0",
-        "dotenv": "^16.0.3",
-        "esbuild": "^0.17.19",
-        "prettier": "^2.8.7",
-        "prettier-plugin-jsdoc": "^0.4.2",
-        "typescript": "^5.0.4",
-        "uvu": "^0.5.6"
-    },
-    "docs": "src/*/**",
-    "dependencies": {
-        "magic-string": "^0.30.1",
-        "prism-svelte": "^0.5.0",
-        "prismjs": "^1.29.0",
-        "svelte": "^4.0.5"
-    }
+    "./package.json": "./package.json",
+    "./types/*": "./lib/index.d.ts"
+  },
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "scripts": {
+    "dev": "tsc -watch",
+    "pretypes": "rm -rf types && mkdir types",
+    "types": "tsc",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "esbuild src/index.js --bundle --external:process --platform=node --target=node16 --outfile=dist/index.cjs",
+    "postbuild": "agadoo src/index.js",
+    "test": "uvu src \".\\.spec\\.js\""
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.1",
+    "@types/prismjs": "^1.26.0",
+    "agadoo": "^3.0.0",
+    "dotenv": "^16.0.3",
+    "esbuild": "^0.17.19",
+    "prettier": "^2.8.7",
+    "prettier-plugin-jsdoc": "^0.4.2",
+    "typescript": "^5.0.4",
+    "uvu": "^0.5.6"
+  },
+  "docs": "src/*/**",
+  "dependencies": {
+    "magic-string": "^0.30.1",
+    "prism-svelte": "^0.5.0",
+    "prismjs": "^1.29.0",
+    "svelte": "^4.0.5"
+  }
 }
